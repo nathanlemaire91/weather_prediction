@@ -20,13 +20,11 @@ permissions:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
     steps:
       - uses: actions/checkout@v3
 
-      - uses: environment-secrets-action@v1
-        with:
-          environment: ${{ inputs.environment }}
-      
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
