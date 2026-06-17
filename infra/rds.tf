@@ -47,8 +47,24 @@ resource "aws_db_parameter_group" "weather-pgroup" {
 }
 
 resource "aws_security_group" "weather-security-group" {
-  name   = "weather-rds"
-  db_subnet_group_name   = aws_db_subnet_group.weather-subnet.name
-  vpc_security_group_ids = [aws_security_group.weather-security-group.id]
-  parameter_group_name   = aws_db_parameter_group.weather-subnet.name
+  name   = "weather_rds"
+  vpc_id = module.vpc.vpc_id
+
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "weather_rds"
+  }
 }
