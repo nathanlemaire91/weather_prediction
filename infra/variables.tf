@@ -1,7 +1,7 @@
 variable "bucket_name" {
   description = "Name of the S3 bucket"
   type        = string
-  default     = "bucket_hello_world"
+  default     = "weather-prediction-bucket-dev"
 }
 
 variable "region" {
