@@ -1,0 +1,1 @@
+curl "https://api.open-meteo.com/v1/forecast?latitude=48.75&longitude=2.3&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
