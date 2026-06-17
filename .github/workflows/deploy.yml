@@ -17,6 +17,10 @@ permissions:
   id-token: write
   contents: read
 
+defaults:
+  run:
+    working-directory: infra
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -32,4 +36,8 @@ jobs:
       
       - uses: hashicorp/setup-terraform@v2
       
-      - run: cd infra && terraform init && terraform apply -auto-approve
+      - run: terraform init
+
+      - run: terraform plan -out=tfplan -var "rds_db_password=${{ secrets.RDS_DB_PASSWORD }}"
+      
+      - run: terraform apply -auto-approve

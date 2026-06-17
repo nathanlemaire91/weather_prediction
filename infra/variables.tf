@@ -15,3 +15,9 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "rds_db_password" {
+  description = "RDS root user password"
+  type        = string
+  sensitive   = true
+}
