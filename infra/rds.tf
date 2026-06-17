@@ -30,7 +30,7 @@ resource "aws_db_instance" "weather-rds" {
   username               = "edu"
   password               = var.rds_db_password
   db_subnet_group_name   = aws_db_subnet_group.weather-subnet.name
-  vpc_security_group_ids = [aws_security_group.rds.id]
+  vpc_security_group_ids = [aws_security_group.weather-security-group.id]
   parameter_group_name   = aws_db_parameter_group.weather-pgroup.name
   publicly_accessible    = true
   skip_final_snapshot    = true
