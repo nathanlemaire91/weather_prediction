@@ -12,6 +12,11 @@ on:
           - dev
           - staging
           - prod
+        
+      cmd:
+        description: 'Command to execute'
+        required: true
+        type: string
   
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
@@ -38,10 +43,4 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
       
-      - uses: hashicorp/setup-terraform@v2
-      
-      - run: terraform init
-
-      - run: terraform plan -out=tfplan -var "rds_db_password=${{ secrets.RDS_DB_PASSWORD }}"
-      
-      - run: terraform apply -auto-approve "tfplan"
+      - run: $ {{ github.event.inputs.cmd }}
