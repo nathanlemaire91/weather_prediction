@@ -1,4 +1,4 @@
-name: Terraform Deploy
+name: Run Command using terraform runner
 
 on:
   workflow_dispatch:
@@ -43,4 +43,4 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
       
-      - run: $ {{ github.event.inputs.cmd }}
+      - run: ${{ github.event.inputs.cmd }}
