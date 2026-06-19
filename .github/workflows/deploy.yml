@@ -54,7 +54,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     needs: deploy_lambda
-    working-directory: infra
+    defaults:
+      run:
+      working-directory: infra
 
     steps:
       - uses: actions/checkout@v3
