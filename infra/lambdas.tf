@@ -69,7 +69,6 @@ resource "aws_iam_role_policy" "lambda_secretsmanager_access" {
 
 resource "aws_lambda_function" "weather_prediction" {
   filename      = "weather-prediction.zip"
-  source_code_hash = filebase64sha256("weather-prediction.zip")
   function_name = "weather-prediction"
   role          = aws_iam_role.lambda_role.arn
   handler       = "index.handler"
