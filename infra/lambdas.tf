@@ -70,7 +70,7 @@ resource "aws_iam_role_policy" "lambda_secretsmanager_access" {
 resource "aws_lambda_function" "weather_prediction" {
   function_name = "weather-prediction"
   role          = aws_iam_role.lambda_role.arn
-  runtime       = "python3.12"
+  package_type  = "Image"
 
   image_uri = "905418241623.dkr.ecr.us-east-1.amazonaws.com/weather-prediction/weather-prediction:${var.image_tag}"
 
