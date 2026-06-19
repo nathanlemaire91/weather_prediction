@@ -43,11 +43,16 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
       
       - name: Build Lambda function
         working-directory: model/predict
         run: |
-          zip -r lambda_function.zip .
+          pip install -r requirements.txt -t python/lib/python3.12/site-packages/
+          zip -r lambda_function.zip python *.py
           aws s3 cp lambda_function.zip s3://${{ vars.S3_BUCKET_NAME }}/lambdas/weather-prediction.zip
 
   terraform:
