@@ -67,20 +67,12 @@ resource "aws_iam_role_policy" "lambda_secretsmanager_access" {
   })
 }
 
-data "aws_s3_object" "lambda_zip" {
-  bucket = "weather-prediction-bucket-dev"
-  key    = "lambdas/weather-prediction.zip"
-}
-
 resource "aws_lambda_function" "weather_prediction" {
   function_name = "weather-prediction"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "main.predict"
   runtime       = "python3.12"
 
-  s3_bucket = "weather-prediction-bucket-dev"
-  s3_key    = "lambdas/weather-prediction.zip"
-  source_code_hash = data.aws_s3_object.lambda_zip.etag
+  image_uri = "905418241623.dkr.ecr.us-east-1.amazonaws.com/weather-prediction/weather-prediction:${var.image_tag}"
 
   environment {
     variables = {

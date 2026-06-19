@@ -99,15 +99,5 @@ def predict_weather():
     save_predictions_to_db(predictions)
 
 
-def predict():
-    try:
-        predict_weather()
-        return {
-            'statusCode': 200,
-            'body': ''
-        }
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'body': ''
-        }
+if __name__ == '__main__':
+    predict_weather()

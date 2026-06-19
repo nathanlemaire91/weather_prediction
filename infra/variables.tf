@@ -21,3 +21,8 @@ variable "rds_db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "image_tag" {
+  description = "Lambda function image tag"
+  type        = string
+}
