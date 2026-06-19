@@ -14,5 +14,5 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 # Copy application code
 COPY . /app
 
-# Default command (override when running)
-CMD ["python"]
+# Start the AWS Lambda Runtime Interface Client for custom container invocation
+CMD ["python3", "-m", "awslambdaric", "main.lambda_handler"]

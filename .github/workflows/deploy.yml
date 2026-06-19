@@ -56,9 +56,10 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: weather-prediction/weather-prediction
           IMAGE_TAG: ${{ github.sha }}
+          LATEST_TAG: latest
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REPOSITORY:$LATEST_TAG .
+          docker push $REGISTRY/$REPOSITORY --all-tags
 
   terraform:
     runs-on: ubuntu-latest

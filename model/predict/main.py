@@ -88,16 +88,26 @@ def predict_weather():
         s3_key=get_env_variable('S3_MODEL_KEY')
     )
 
-    data = get_predict_data(data)
+    data = get_predict_data()
     
     try:
         predictions = model.predict(data)
     except Exception as e:
         print(f"Error making predictions: {e}")
-        raise
+        raise e
 
     save_predictions_to_db(predictions)
 
 
-if __name__ == '__main__':
-    predict_weather()
+def lambda_handler(event, context):
+    try:
+        predict_weather()
+        return {
+            'statusCode': 200,
+            'body': 'Prediction completed'
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': f'Error while predicting {e}'
+        }

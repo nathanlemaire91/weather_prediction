@@ -33,7 +33,7 @@ class DatabaseConnection(Singleton):
             return conn
         except Exception as e:
             print(f"Database connection error: {e}")
-            raise
+            raise e
 
     def close(self, conn):
         if conn:
@@ -50,7 +50,7 @@ class DatabaseConnection(Singleton):
             return result
         except Exception as e:
             print(f"Query execution error: {e}")
-            raise
+            raise e
         finally:
             self.close(conn)
 

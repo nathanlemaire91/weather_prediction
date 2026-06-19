@@ -19,7 +19,7 @@ def get_secret_manager_value():
         secret = client.get_secret_value(SecretId='my-db-password')
     except Exception as e:
         print(f"Error fetching secret from AWS Secrets Manager: {e}")
-        raise
+        raise e
 
     return secret['SecretString']
 
@@ -32,7 +32,7 @@ def get_env_variable(var_name):
         return value
     except Exception as e:
         print(f"Error retrieving environment variable '{var_name}': {e}")
-        raise
+        raise e
 
 def open_joblib_s3(s3_bucket, s3_key):
     # Read latest model from s3 bucket
@@ -44,17 +44,17 @@ def open_joblib_s3(s3_bucket, s3_key):
         s3_key = s3_client.list_objects_v2(Bucket=s3_bucket, Prefix=s3_key)['Contents'][-1]['Key']
     except Exception as e:
         print(f"Error fetching model from S3: {e}")
-        raise
+        raise e
 
     try:
         s3_client.download_file(s3_bucket, s3_key, 'model.pkl')
     except Exception as e:
         print(f"Error downloading model from S3: {e}")
-        raise
+        raise e
     
     try:
         model = joblib.load('model.pkl')
         return model
     except Exception as e:
         print(f"Error loading model: {e}")
-        raise
+        raise e
