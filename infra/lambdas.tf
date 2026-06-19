@@ -75,6 +75,7 @@ resource "aws_lambda_function" "weather_prediction" {
 
   s3_bucket = "weather-prediction-bucket-dev"
   s3_key    = "lambdas/weather-prediction.zip"
+  source_code_hash = filebase64sha256("weather-prediction-bucket-dev/lambdas/weather-prediction.zip")
 
   environment {
     variables = {
