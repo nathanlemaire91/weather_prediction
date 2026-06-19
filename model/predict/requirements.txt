@@ -8,4 +8,4 @@ requests_cache
 retry_requests
 psycopg2
 boto3
-aws-lambda-ric
+awslambdaric
