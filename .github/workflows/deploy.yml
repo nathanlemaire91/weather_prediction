@@ -48,7 +48,7 @@ jobs:
         working-directory: model/predict
         run: |
           zip -r lambda_function.zip .
-          aws s3 cp lambda_function.zip s3://${{ vars.S3_BUCKET_NAME }}/lambda_function.zip
+          aws s3 cp lambda_function.zip s3://${{ vars.S3_BUCKET_NAME }}/weather-prediction.zip
 
   terraform:
     runs-on: ubuntu-latest
