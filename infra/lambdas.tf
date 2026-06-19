@@ -70,7 +70,7 @@ resource "aws_iam_role_policy" "lambda_secretsmanager_access" {
 resource "aws_lambda_function" "weather_prediction" {
   function_name = "weather-prediction"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.handler"
+  handler       = "main.predict"
   runtime       = "python3.12"
 
   s3_bucket = "weather-prediction-bucket-dev"
