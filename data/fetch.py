@@ -16,7 +16,7 @@ params = {
 	"latitude": 48.8534,
 	"longitude": 2.3488,
 	"start_date": "2020-01-01",
-	"end_date": "2025-12-31",
+	"end_date": "2026-06-19",
 	"hourly": ["temperature_2m", "relative_humidity_2m", "precipitation"],
 }
 responses = openmeteo.weather_api(url, params = params)
@@ -47,4 +47,4 @@ hourly_data["relative_humidity_2m"] = hourly_relative_humidity_2m
 hourly_data["precipitation"] = hourly_precipitation
 	
 hourly_dataframe = pd.DataFrame(data = hourly_data)
-hourly_dataframe.to_csv('data/Paris_2020_2025_hourly.csv', index = False)
+hourly_dataframe.to_csv('data/Paris_2020_2026_hourly.csv', index = False)

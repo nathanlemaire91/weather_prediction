@@ -12,6 +12,15 @@ on:
           - dev
           - staging
           - prod
+
+      build_lambda:
+        description: 'Build Lambda function'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - true
+          - false
   
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
@@ -26,6 +35,25 @@ defaults:
     working-directory: infra
 
 jobs:
+  deploy_lambda:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.build_lambda == 'true' }}
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+      
+      - name: Build Lambda function
+        run: |
+          cd model/predict
+          zip -r lambda_function.zip .
+          aws s3 cp lambda_function.zip s3://${{ vars.S3_BUCKET_NAME }}/lambda_function.zip
+
   terraform:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}

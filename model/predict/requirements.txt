@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+tensorflow
+scikit-learn
+openmeteo_requests
+requests_cache
+retry_requests
+psycopg2
+boto3
