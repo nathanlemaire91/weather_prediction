@@ -56,7 +56,7 @@ jobs:
     needs: deploy_lambda
     defaults:
       run:
-      working-directory: infra
+        working-directory: infra
 
     steps:
       - uses: actions/checkout@v3
